@@ -22,7 +22,7 @@ from reportlab.platypus import (
 
 st.set_page_config(
     page_title="AI Resume Analyzer",
-    page_icon="📄",
+    page_icon="cv.png",
     layout="wide",
     initial_sidebar_state="collapsed",
 )
