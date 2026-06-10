@@ -1,6 +1,5 @@
 import hashlib
 import re
-import textwrap
 from io import BytesIO
 
 from groq import Groq
@@ -370,7 +369,7 @@ st.markdown("""
     <div>
         <div class="app-header-title">
             AI Resume Analyzer
-            <span class="pill">Groq 2.0 Flash</span>
+            <span class="pill">Llama 3.3 70B</span>
         </div>
         <div class="app-header-sub">
             ATS scoring &nbsp;·&nbsp; Keyword gap analysis &nbsp;·&nbsp; Deep AI recruiter feedback &nbsp;·&nbsp; PDF report
@@ -378,9 +377,6 @@ st.markdown("""
     </div>
 </div>
 """, unsafe_allow_html=True)
-
-if not GROQ_API_KEY:
-    st.warning("⚠️  Add your Groq API key in the sidebar to enable AI analysis. Get one free at https://console.groq.com/home", icon="🔑")
 
 # ─────────────────────────────────────────────
 # INPUT
@@ -450,12 +446,8 @@ if analyze_clicked:
         score, matched, missing = calculate_ats(resume_text, job_description)
         grade = get_grade(score)
 
-    ai_text = ""
-    if GROQ_API_KEY:
-        with st.spinner("🤖 Getting deep AI analysis from Groq… (~15 seconds)"):
-            ai_text = get_ai_analysis(resume_text, job_description, score, matched, missing)
-    else:
-        ai_text = "⚠️ Add your Groq API key in the sidebar to get AI analysis."
+    with st.spinner("🤖 Getting deep AI analysis from Groq… (~15 seconds)"):
+        ai_text = get_ai_analysis(resume_text, job_description, score, matched, missing)
 
     # ── Results ──
     st.markdown('<hr class="custom-divider">', unsafe_allow_html=True)
