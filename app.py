@@ -135,10 +135,7 @@ import os
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
 
 with st.sidebar:
-    sidebar_key = st.text_input("Groq API Key", type="password", value=GROQ_API_KEY)
-    if sidebar_key:
-        GROQ_API_KEY = sidebar_key
-    st.caption("Key stays in memory — never stored.")
+    st.caption("🔒 API key secured via environment secrets.")
     st.divider()
     st.markdown("**Model:** `Groq-llama-3.3-70b (Groq)`")
     st.markdown("**About**")
