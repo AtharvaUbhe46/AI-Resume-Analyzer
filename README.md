@@ -1,34 +1,36 @@
-# AI Resume Analyzer
+# AI Resume Analyzer 📄
 
-An ATS resume analyzer built with Streamlit and Gemini 1.5 Flash.
+A Streamlit app that analyzes your resume against a job description — gives you an ATS score, keyword gap analysis, and deep AI recruiter feedback powered by Groq (Llama 3.3 70B).
 
-## Quick Start
+## What it does
 
+Upload your resume PDF and paste a job description. The app tells you:
+- How well your resume matches the JD (ATS score)
+- Which keywords you're missing
+- Specific rewrite suggestions
+- Honest recruiter-style feedback on your strengths and gaps
+- A downloadable PDF report of the full analysis
+
+## Setup
+
+1. Clone the repo and install dependencies:
 ```bash
-# 1. Install dependencies
 pip install -r requirements.txt
+```
 
-# 2. Add your Gemini API key to .env
-# Get a free key at https://aistudio.google.com/apikey
+2. Create a `.env` file and add your Groq API key:
 
-# 3. Run the app
+Get a free key at https://console.groq.com
+
+3. Run the app:
+```bash
 streamlit run app.py
 ```
 
-## Features
-- PDF text extraction (client-side parsing)
-- ATS keyword scoring with stopword filtering
-- Matched / missing keyword chips
-- Gemini AI recruiter feedback (6 sections)
-- Donut + horizontal bar charts
-- PDF report export
+## Tech Stack
 
-## Fixes in this version
-- API key moved to .env (no hardcoding)
-- Stopword filtering fixes inflated ATS scores
-- PDF validation catches scanned/empty PDFs
-- Session-state caching fixed (hash checked outside button scope)
-- Bar chart now shows ranked keywords instead of flat Count=1
-- AI prompt produces structured, section-headed output
-- PDF report has proper styling and table
-- `st.stop()` replaced with safer validation pattern
+- **Streamlit** — UI
+- **Groq (Llama 3.3 70B)** — AI analysis
+- **PyPDF2** — PDF text extraction
+- **Plotly** — Charts
+- **ReportLab** — PDF report generation
