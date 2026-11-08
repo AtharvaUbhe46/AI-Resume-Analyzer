@@ -1,7 +1,8 @@
 import hashlib
+import os
 import re
 from io import BytesIO
-
+from dotenv import load_dotenv
 from groq import Groq
 import pandas as pd
 import plotly.express as px
@@ -130,15 +131,19 @@ for key, default in [
 # Groq SETUP
 # ─────────────────────────────────────────────
 
-import os
+load_dotenv()
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
+GROQ_MODEL = "openai/gpt-oss-20b"
 
 with st.sidebar:
     st.caption("🔒 API key secured via environment secrets.")
     st.divider()
-    st.markdown("**Model:** `Groq-llama-3.3-70b (Groq)`")
+    st.markdown(f"**Model:** `{GROQ_MODEL}`")
     st.markdown("**About**")
-    st.caption("ATS uses stopword-filtered keyword overlap. AI feedback is deep resume-specific analysis via Groq.")
+    st.caption(
+        "ATS uses stopword-filtered keyword overlap. "
+        "AI feedback is deep resume-specific analysis via Groq."
+    )
 
 groq_client = None
 if GROQ_API_KEY:
@@ -260,7 +265,7 @@ Important: Be direct, professional, and brutally honest. A generic analysis help
 
     try:
         response = groq_client.chat.completions.create(
-        model="llama-3.3-70b-versatile",
+        model=GROQ_MODEL,
         messages=[{"role": "user", "content": prompt}],
         max_tokens=1500,)
         result = response.choices[0].message.content
@@ -369,7 +374,7 @@ st.markdown("""
     <div>
         <div class="app-header-title">
             AI Resume Analyzer
-            <span class="pill">Llama 3.3 70B</span>
+            <span class="pill">openai/gpt-oss-20b</span>
         </div>
         <div class="app-header-sub">
             ATS scoring &nbsp;·&nbsp; Keyword gap analysis &nbsp;·&nbsp; Deep AI recruiter feedback &nbsp;·&nbsp; PDF report
